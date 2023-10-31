@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频页面</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #video-container {
+            flex: 3;
+            background-color: #000;
+        }
+
+        #video {
+            width: 100%;
+            height: 100%;
+        }
+
+        #content-container {
+            flex: 1;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        #content {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        #buttons {
+            margin-top: 20px;
+        }
+
+        #buttons button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="video-container">
+        <video id="video" controls autoplay>
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div id="content-container">
+        <div id="content">
+            <h2>视频 讨论3873</h2>
+            <p>拆案：黎明将至</p>
+            <p>5167</p>
+            <p>· 电视剧飙升榜第3名</p>
+            <p>简介 5.2万 收藏 下载</p>
+            <p>韩***刚刚加入了黄金VIP会员</p>
+            <p>姜****刚刚加入了黄金VIP会员</p>
+            <p>广告特权 海量高分大片 1080P</p>
+            <p>开通会员新朋友特惠</p>
+            <p>拆案：黎明将至</p>
+            <div id="buttons">
+                <button>切换</button>
+                <button>追更日历</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 获取视频链接并设置为视频的src
+        fetch('http://zlaa-long-long-life.eastasia.cloudapp.azure.com:5000/get_a_video')
+            .then(response => response.text())
+            .then(videoUrl => {
+                const videoElement = document.getElementById('video');
+                videoElement.src = videoUrl;
+            })
+            .catch(error => {
+                console.error('Failed to fetch video URL: ', error);
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Thumbnails</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #000000; /* 深灰色背景 */
+            margin: 0; /* 去除默认的外边距 */
+            padding: 0; /* 去除默认的内边距 */
+        }
+
+        .header {
+            position: relative;
+        }
+
+        .header video {
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: -1; /* 视频在下方，文本和其他内容在上方 */
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(139, 69, 19, 0), rgba(139, 69, 19, 0)); /* 棕色渐变到透明 */
+        }
+
+        .page-container {
+            max-width: 1400px; /* 设置最大宽度 */
+            margin: 0 auto; /* 居中显示 */
+            padding: 50px; /* 调整左右内边距，减小与第一栏的距离 */
+        }
+
+        .wide-video-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 0px;
+        }
+
+        .narrow-video-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .wide-video-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            grid-gap: 15px; /* 减小网格之间的间距 */
+        }
+
+        .narrow-video-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-gap: 20px; /* 稍微减小网格之间的间距 */
+        }
+
+        .video-thumbnail {
+            display: inline-block;
+            width: 100%;
+            border: none; /* 添加白色边框 */
+            border-radius: 10px; /* 圆角矩形边框 */
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-thumbnail img {
+            max-width: 100%;
+            border-radius: 10px; /* 圆角矩形边框 */
+        }
+
+        .video-info {
+            text-align: left; /* 左对齐 */
+            padding: 10px; /* 将标题和描述内边距增加 */
+        }
+
+        .video-name {
+            font-weight: bold;
+            color: white; /* 白色标题 */
+        }
+
+        .video-detail {
+            text-align: left;
+            color: #ccc; /* 浅灰色描述 */
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: white; /* 白色标题 */
+            font-size: 24px; /* 设置标题字体大小 */
+            margin-bottom: 20px; /* 添加底部间距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <video autoplay muted loop>
+            <source src="https://storesxy.blob.core.windows.net/big-video/big-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="page-container">
+        <div class="wide-video-container">
+            <div class="section-title">正在热播</div> <!-- 添加 "正在热播" 文本行 -->
+            <div class="wide-video-column" id="wide-images">
+                <!-- Images with a wide aspect ratio will be displayed here -->
+            </div>
+        </div>
+        <div class="narrow-video-container">
+            <div class="section-title">猜你喜欢</div> <!-- 添加 "猜你喜欢" 文本行 -->
+            <div class="narrow-video-column" id="narrow-images">
+                <!-- Images with a narrow aspect ratio will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to fetch video data from the backend and create thumbnails
+        async function fetchVideoData() {
+            try {
+                const response = await fetch('http://zlaa-long-long-life.eastasia.cloudapp.azure.com:5000/get_list');
+                const data = await response.json();
+
+                const wideImagesContainer = document.getElementById('wide-images');
+                const narrowImagesContainer = document.getElementById('narrow-images');
+
+                data.forEach(video => {
+                    const thumbnailDiv = document.createElement('div');
+                    thumbnailDiv.className = 'video-thumbnail';
+
+                    const img = document.createElement('img');
+                    img.src = video.image_url;
+
+                    const infoDiv = document.createElement('div');
+                    infoDiv.className = 'video-info';
+
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'video-name';
+                    nameDiv.textContent = video.video_name;
+
+                    const detailDiv = document.createElement('div');
+                    detailDiv.className = 'video-detail';
+                    detailDiv.textContent = video.video_detail;
+
+                    infoDiv.appendChild(nameDiv);
+                    infoDiv.appendChild(detailDiv);
+
+                    thumbnailDiv.appendChild(img);
+                    thumbnailDiv.appendChild(infoDiv);
+
+                    // Determine whether the image is wide or narrow based on its aspect ratio
+                    if (img.width / img.height >= 1) {
+                        wideImagesContainer.appendChild(thumbnailDiv);
+                    } else {
+                        narrowImagesContainer.appendChild(thumbnailDiv);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching video data:', error);
+            }
+        }
+
+        fetchVideoData();
+        // Function to fetch video data from the backend and create thumbnails
+        async function fetchVideoData() {
+            try {
+                const response = await fetch('http://zlaa-long-long-life.eastasia.cloudapp.azure.com:5000/get_list');
+                const data = await response.json();
+
+                const wideImagesContainer = document.getElementById('wide-images');
+                const narrowImagesContainer = document.getElementById('narrow-images');
+
+                data.forEach(video => {
+                    const thumbnailDiv = document.createElement('div');
+                    thumbnailDiv.className = 'video-thumbnail';
+
+                    const img = document.createElement('img');
+                    img.src = video.image_url;
+
+                    const infoDiv = document.createElement('div');
+                    infoDiv.className = 'video-info';
+
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'video-name';
+                    nameDiv.textContent = video.video_name;
+
+                    const detailDiv = document.createElement('div');
+                    detailDiv.className = 'video-detail';
+                    detailDiv.textContent = video.video_detail;
+
+                    infoDiv.appendChild(nameDiv);
+                    infoDiv.appendChild(detailDiv);
+
+                    thumbnailDiv.appendChild(img);
+                    thumbnailDiv.appendChild(infoDiv);
+
+                    // 添加点击事件监听器
+                    thumbnailDiv.addEventListener('click', function() {
+                        window.location.href = 'main2.html';
+                    });
+
+                    // Determine whether the image is wide or narrow based on its aspect ratio
+                    if (img.width / img.height >= 1) {
+                        wideImagesContainer.appendChild(thumbnailDiv);
+                    } else {
+                        narrowImagesContainer.appendChild(thumbnailDiv);
+                    }
+                });
+            } catch (error) {
+                console.error('Error fetching video data:', error);
+            }
+        }
+
+        fetchVideoData();
+    </script>
+</body>
+</html>
