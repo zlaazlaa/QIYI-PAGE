@@ -45,9 +45,74 @@
             cursor: pointer;
             margin-right: 10px;
         }
+
+        /* 导航栏样式，与第一个页面相同 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: transparent;
+            color: white;
+            padding: 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 3;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: rgb(215, 215, 215);
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 21px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .iqiyi {
+            color: rgb(100, 217, 106);
+        }
+
+        .gold-text {
+            color: rgb(219, 187, 142);
+        }
+
+        .search-box {
+            padding: 5px;
+            border: none;
+            background-color: #444;
+            color: #ccc;
+            border-radius: 5px;
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
+    <!-- 导航栏 -->
+    <div class="navbar">
+        <a class="iqiyi" href="#"><span class="iqiyi">iQIYI爱奇艺</span></a>
+        <a href="#"><span class="iqiyi">首页</span></a>
+        <a href="#"><span>免费专区</span></a>
+        <a href="#"><span>电视剧</span></a>
+        <a class="gold-text" href="#"><span class="gold-text">会员中心</span></a>
+        <input type="text" class="search-box" placeholder="搜索">
+        <img src="search-icon.png" alt="搜索图标" class="search-icon">
+    </div>
+
     <div id="video-container">
         <video id="video" controls autoplay>
             Your browser does not support the video tag.

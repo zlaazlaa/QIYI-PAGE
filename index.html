@@ -4,6 +4,65 @@
     <title>Video Thumbnails</title>
     <meta charset="UTF-8">
     <style>
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: transparent;
+            color: white;
+            padding: 20px 20px; /* 上下内边距增加到 20px */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 3;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: rgb(215, 215, 215); /* 更改字体颜色为白色 */
+            margin: 0 15px; /* 链接之间的间距 */
+            font-weight: bold; /* 加粗字体 */
+            font-size: 21px; /* 设置字体大小为 16px */
+        }
+
+        /* 导航栏链接样式 */
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            margin: 0 15px;
+            font-weight: bold; /* 设置字体加粗 */
+        }
+
+        /* iQIYI和首页的绿色字体 */
+        .iqiyi {
+            color: rgb(100, 217, 106);
+        }
+
+        /* 会员中心的金色字体 */
+        .gold-text {
+            color: rgb(219, 187, 142);
+        }
+
+        /* 搜索框样式 */
+        .search-box {
+            padding: 5px;
+            border: none;
+            background-color: #444; /* 搜索框背景颜色 */
+            color: #ccc; /* 搜索框文字颜色 */
+            border-radius: 5px; /* 圆角边框 */
+        }
+
+        /* 搜索图标样式 */
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+
         body {
             background-color: #000000; /* 深灰色背景 */
             margin: 0; /* 去除默认的外边距 */
@@ -21,6 +80,7 @@
             z-index: -1; /* 视频在下方，文本和其他内容在上方 */
         }
 
+        /* 顶部视频蒙版样式 */
         .header::before {
             content: "";
             position: absolute;
@@ -28,10 +88,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)); /* 黑色渐变到透明 */
-            z-index: 1; /* 确保蒙版在视频上方 */
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent, transparent, rgba(0, 0, 0, 0.65));
+            z-index: 1;
         }
-
         .page-container {
             max-width: 1400px; /* 设置最大宽度 */
             margin: 0 auto; /* 居中显示 */
@@ -109,8 +168,17 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a class="iqiyi" href="#"><span class="iqiyi">iQIYI爱奇艺</span></a>
+        <a href="#"><span class="iqiyi">首页</span></a>
+        <a href="#"><span>免费专区</span></a>
+        <a href="#"><span>电视剧</span></a>
+        <a class="gold-text" href="#"><span class="gold-text">会员中心</span></a>
+        <input type="text" class="search-box" placeholder="搜索">
+        <img src="search-icon.png" alt="搜索图标" class="search-icon">
+    </div>
    <div class="header">
-        <video autoplay muted loop style="height: 350px; object-fit: none;">
+        <video autoplay muted loop style="height: 400px; object-fit: none;">
             <source src="https://storesxy.blob.core.windows.net/big-video/big-video.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
